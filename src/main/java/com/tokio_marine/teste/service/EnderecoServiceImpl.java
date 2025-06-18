@@ -1,5 +1,6 @@
 package com.tokio_marine.teste.service;
 
+import com.tokio_marine.teste.dto.ViaCepResponse;
 import com.tokio_marine.teste.exception.RecursoNaoEncontradoException;
 import com.tokio_marine.teste.exception.RegraNegocioException;
 import com.tokio_marine.teste.model.Endereco;
@@ -7,6 +8,7 @@ import com.tokio_marine.teste.model.Usuario;
 import com.tokio_marine.teste.repository.EnderecoRepository;
 import com.tokio_marine.teste.repository.UsuarioRepository;
 import com.tokio_marine.teste.service.interfaces.EnderecoService;
+import com.tokio_marine.teste.service.interfaces.ViaCepService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     private final EnderecoRepository enderecoRepository;
     private final UsuarioRepository usuarioRepository;
+    private final ViaCepService viaCepService;
 
     @Override
     public Endereco salvarEndereco(Endereco endereco, Long usuarioId) {
@@ -25,8 +28,18 @@ public class EnderecoServiceImpl implements EnderecoService {
             Usuario usuario = usuarioRepository.findById(usuarioId)
                     .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
 
+            ViaCepResponse viaCep = viaCepService.consultarCep(endereco.getCep());
+
+            endereco.setLogradouro(viaCep.getLogradouro());
+            endereco.setBairro(viaCep.getBairro());
+            endereco.setCidade(viaCep.getLocalidade());
+            endereco.setEstado(viaCep.getUf());
+
             endereco.setUsuario(usuario);
             return enderecoRepository.save(endereco);
+
+        } catch (RegraNegocioException e) {
+            throw e;
         } catch (Exception e) {
             throw new RegraNegocioException("Erro ao salvar endereço: " + e.getMessage());
         }

@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "3f446bb5-94ec-4d00-9a9c-9a41c25f0e82",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39263104",
+		"_collection_link": "https://www.postman.com/tet555-0655/workspace/pessoal/collection/39263104-3f446bb5-94ec-4d00-9a9c-9a41c25f0e82?action=share&source=collection_link&creator=39263104"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Renan Silva\",\r\n  \"email\": \"renan4@email.com\",\r\n  \"senha\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"renan4@email.com\",\r\n  \"senha\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar usuarios",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyZW5hbjRAZW1haWwuY29tIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV0sImlhdCI6MTc1MDE5NzY5NiwiZXhwIjoxNzUwMjAxMjk2fQ.YF789S0mytYZ3SX2ekbeJ-aFcgxeSnai-TYMDj8wmXo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios?pagina=1&tamanho=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios"
+					],
+					"query": [
+						{
+							"key": "pagina",
+							"value": "1"
+						},
+						{
+							"key": "tamanho",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "criar endereco",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyZW5hbkBlbWFpbC5jb20iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJpYXQiOjE3NDk4Mzg3OTgsImV4cCI6MTc0OTg0MjM5OH0.aEcUksUh-wLzN_EeqnTQntKrchI8Tp2WiF0_X0Wd_bc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"logradouro\": \"R. Dona Tecla\",\r\n  \"numero\": \"816\",\r\n  \"complemento\": \"14b\",\r\n  \"bairro\": \"Jardim Flor da Montanha\",\r\n  \"cidade\": \"Guarulhos\",\r\n  \"estado\": \"SP\",\r\n  \"cep\": \"070380-070\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/enderecos/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"enderecos",
+						"6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

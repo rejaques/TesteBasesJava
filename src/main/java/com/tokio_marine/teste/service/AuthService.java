@@ -28,7 +28,7 @@ public class AuthService {
         usuario.setNome(request.getNome());
         usuario.setEmail(request.getEmail());
         usuario.setSenha(passwordEncoder.encode(request.getSenha()));
-        usuario.setRole(Role.ROLE_ADMIN);
+        usuario.setRole(request.getRole() != null ? request.getRole() : Role.ROLE_USER);
         usuarioRepository.save(usuario);
 
         String token = jwtService.generateToken(usuario);
@@ -42,7 +42,7 @@ public class AuthService {
 
         UserDetails user = usuarioRepository.findByEmail(request.getEmail())
                 .orElseThrow();
-
+        
         String token = jwtService.generateToken(user);
         return new AuthResponse(token);
     }

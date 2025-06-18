@@ -3,6 +3,9 @@ package com.tokio_marine.teste.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,11 +26,16 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Nome é obrigatório")
     private String nome;
 
+    @Email(message = "E-mail inválido")
+    @NotBlank(message = "E-mail é obrigatório")
     @Column(unique = true)
     private String email;
 
+    @NotBlank(message = "Senha é obrigatória")
+    @Size(min = 6, message = "Senha deve ter no mínimo 6 caracteres")
     private String senha;
 
     @Enumerated(EnumType.STRING)

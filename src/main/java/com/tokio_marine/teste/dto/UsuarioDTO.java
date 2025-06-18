@@ -24,7 +24,9 @@ public class UsuarioDTO {
 
     @NotBlank(message = "Senha é obrigatória")
     private String senha;
-    private Role role;
+
+
+    private Role role;    
 
     public static UsuarioDTO fromEntity(Usuario usuario) {
         return new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), null, usuario.getRole());
